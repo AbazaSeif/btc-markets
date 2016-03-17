@@ -1,13 +1,13 @@
 # BTC Market Data
 
-Simple PHP aggregator for Bitcoin market data from the btcmarkets.net Bitcoin exchange.
+Simple PHP aggregator for Bitcoin market data from the Australian [btcmarkets.net](https://btcmarkets.net/) Bitcoin exchange.
 
 # Why would I want this?
 This application can be used to collect market data for trend analysis or maybe you just want an easy way to find out current price of Bitcoin in AUD.
 
 # Application Setup:
 
-Create a MySQL database for the application to use ( don't worry about the tables RedBean will create these for us as needed )
+Create a MySQL database for the application to use ( don't worry about the tables RedBean will create these for you as needed )
 
 Change the database parameters to match your environment in config/config.ini
 
@@ -15,22 +15,22 @@ Run "composer install" to fetch the required dependencies
 
 # Existing Routes:
 
-Current Price
+**Current Price**
 * /current-price/BTC - Returns the current Bitcoin ticker price.
 * /current-price/LTC - Same as the above route but for Litecoin
 * /current-price/ETH - Same as the above route but for Ethercoin
 
-Average Price
+**Average Price**
 * /average-price/BTC - Returns the average Bitcoin market price across the datapoints in the database
 * /average-price/LTC - Same as the above route but for Litecoin
 * /average-price/LTC - Same as the above route but for Ethercoin
 
-Latest Trades
+**Latest Trades**
 * /latest-trades - Returns information about the latest Bitcoin trades on the exchange
 * /latest-trades/LTC - Same as the above route but for Litecoin
 * /latest-trades/LTC - Same as the above route but for Ethercoin
 
-Order Book
+**Order Book**
 * /order-book - Get the exchange order book for Bitcoin trades
 * /order-book/BTC - Get the exchange order book for Bitcoin trades
 * /order-book/LTC - Same as the above route but for Litecoin
@@ -40,12 +40,12 @@ Order Book
 
 Dependencies are for the application are managed by Composer. The external libraries needed are as follows:
 
-*[Redbean ORM](http://www.redbeanphp.com/)
-*[Klein](https://github.com/chriso/klein.php)
+* [Redbean ORM](http://www.redbeanphp.com/)
+* [Klein](https://github.com/chriso/klein.php)
 
 Further information can be found at the wiki for the BTC markets API on github:
 
-*[BTC Markets API](https://github.com/BTCMarkets/API)
+* [BTC Markets API](https://github.com/BTCMarkets/API)
 
 # Licence
 
