@@ -12,13 +12,22 @@ $klein->respond('GET', '/current-price', function ()
     return json_encode($apiResp);
 });
 
+$klein->respond('GET', '/update-all', function () 
+{
+	$btcApp = new \btcMarkets\btcApp();
+	$apiResp = $btcApp->updateAll();		
+
+    return json_encode($apiResp);
+});
+
 $klein->respond('GET', '/current-price/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
 		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' || strtoupper($request->targetUnit) === 'ETH' ) {
-			$apiResp = $btcApp->updatePrice( strtoupper($request->targetUnit) );
+				
+			$apiResp = $btcApp->getPrice( strtoupper($request->targetUnit) );
 
  			return json_encode($apiResp);
 		} else {

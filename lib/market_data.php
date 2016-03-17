@@ -5,6 +5,39 @@ use \RedBeanPHP\R;
 
 class marketData {
 
+	public function __construct()
+	{
+		R::setup( 'mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS );
+	}
+
+	public function __destruct()
+	{
+		R::close();
+	}
+
+	/**
+	* Get the latest price for a currency
+	*
+	* @param string $targetUnit
+	* @param integer $resultLimit
+	*
+	* @return object $coinPrice
+	*/
+	public function getPrice( $targetUnit = 'BTC', $resultLimit = 1 )
+	{
+		$coinPrice = R::find('marketdata',
+				       ' instrument = :targetUnit ORDER BY timestamp DESC LIMIT :resultLimit', 
+				            array( 
+				                ':targetUnit' => $targetUnit,
+				                ':resultLimit' => $resultLimit
+				            )
+		               );
+
+		if ($coinPrice) {
+			return $coinPrice;
+		}
+	}
+
 	/**
 	* Save ticker data to the database
 	*
@@ -14,7 +47,7 @@ class marketData {
 	*/
 	public function saveTicker( $tickerData )
 	{
-		R::setup( 'mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS );
+
 		$priceObj = R::dispense("marketdata");
 
 		$priceObj->best_bid = $tickerData->bestBid;
@@ -37,8 +70,6 @@ class marketData {
 	public function updateTrades($tradeData)
 	{
 		$savedRows = 0;
-
-		R::setup( 'mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS );
 		
 		$tradeData = json_decode($tradeData);
 
@@ -71,9 +102,7 @@ class marketData {
 	* @param string $targetUnit
 	*/
 	public function averageTickerPrice( $targetUnit='BTC' )
-	{
-		R::setup( 'mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS );
-		
+	{		
 		$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit'");
 
 		if (($avgPrice) && (is_numeric($avgPrice))) {

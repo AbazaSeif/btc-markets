@@ -5,9 +5,10 @@ use \btcMarkets\marketData;
 use \btcMarkets\btcMarkets;
 
 class btcApp {
-	
+	protected $_activeCoins = array('BTC', 'LTC', 'ETH');
+
 	/**
-	* Get the target ticker price
+	* Update the target ticker price for one currency
 	*
 	* @param string $targetUnit
 	*/
@@ -21,6 +22,19 @@ class btcApp {
 
 		$marketData = new marketData();
 		$tickerRow = $marketData->saveTicker( $marketObj );
+
+		return $tickerRow;
+	}
+
+	/**
+	* Get the latest ticker price for a currency
+	*
+	* @param string $targetUnit
+	*/
+	public function getPrice($targetUnit = 'BTC')
+	{
+		$marketData = new marketData();
+		$tickerRow = $marketData->getPrice( $targetUnit );
 
 		return $tickerRow;
 	}
@@ -79,5 +93,26 @@ class btcApp {
 		} else {
 			return array('error' => 'Not enough data to provide average price.', 'data' =>  null);
 		}
+	}
+
+	/**
+	* Update all of the active cryptocurrencies from the exchange
+	*
+	* @return array
+	*/
+	public function updateAll()
+	{
+		$btcMarkets = new btcMarkets();
+		$marketData = new marketData();
+
+		foreach ($this->_activeCoins as $activeCoin) {
+			$apiResp = $btcMarkets->getTick( $activeCoin );
+
+			$marketObj = $btcMarkets->parseJson( $apiResp );
+			$tickerRow = $marketData->saveTicker( $marketObj );
+		}
+
+
+		return array('data' => 'All currencies updated', 'error' => false);		
 	}
 }

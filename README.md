@@ -7,7 +7,7 @@ This application can be used to collect market data for trend analysis or maybe 
 
 # Application Setup:
 
-Create a MySQL database for the application to use ( don't worry about the tables RedBean will create these for you as needed )
+Create a MySQL database for the application to use, and import the structure from the sql/dump.sql file.
 
 Change the database parameters to match your environment in config/config.ini
 
@@ -35,6 +35,9 @@ Run "composer install" to fetch the required dependencies
 * /order-book/BTC - Get the exchange order book for Bitcoin trades
 * /order-book/LTC - Same as the above route but for Litecoin
 * /order-book/ETH - Same as the above route but for Ethereum
+
+**Misc**
+* /update-all - Update the ticker prices for all of the active cryptocurrencies
 
 # Required Libraries:
 
