@@ -23,18 +23,18 @@ Run "composer install" to fetch the required dependencies
 **Average Price**
 * /average-price/BTC - Returns the average Bitcoin market price across the datapoints in the database
 * /average-price/LTC - Same as the above route but for Litecoin
-* /average-price/LTC - Same as the above route but for Ethereum
+* /average-price/ETH - Same as the above route but for Ethereum
 
 **Latest Trades**
 * /latest-trades - Returns information about the latest Bitcoin trades on the exchange
 * /latest-trades/LTC - Same as the above route but for Litecoin
-* /latest-trades/LTC - Same as the above route but for Ethereum
+* /latest-trades/ETH - Same as the above route but for Ethereum
 
 **Order Book**
 * /order-book - Get the exchange order book for Bitcoin trades
 * /order-book/BTC - Get the exchange order book for Bitcoin trades
 * /order-book/LTC - Same as the above route but for Litecoin
-* /order-book/LTC - Same as the above route but for Ethereum
+* /order-book/ETH - Same as the above route but for Ethereum
 
 # Required Libraries:
 
