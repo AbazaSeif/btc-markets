@@ -36,6 +36,12 @@ Run "composer install" to fetch the required dependencies
 * /order-book/LTC - Same as the above route but for Litecoin
 * /order-book/ETH - Same as the above route but for Ethereum
 
+**Price Summary**
+* /price-summary/ - Get the min, max and average BTC price over the last 24hrs
+* /price-summary/BTC - Same as above but explicitly stating you want the BTC summary
+* /price-summary/LTC - Same as above but for Litecoin
+* /price-summary/ETH - Same as aabove but for Ethereum
+
 **Misc**
 * /update-all - Update the ticker prices for all of the active cryptocurrencies
 

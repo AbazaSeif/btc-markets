@@ -121,3 +121,29 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 
    	return 'Ticker unit not found';
 });
+
+// Start routes related to price summary
+$klein->respond('GET', '/price-summary', function () {	
+	$btcApp = new \btcMarkets\btcApp();
+
+	$apiResp = json_encode($btcApp->priceSummary());
+	
+    return $apiResp;
+});
+
+$klein->respond('GET', '/price-summary/[:targetUnit]', function ($request) 
+{
+	$btcApp = new \btcMarkets\btcApp();
+
+	if (isset($request->targetUnit)) {
+		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit) );
+
+ 			return json_encode($apiResp);
+		} else {
+			return 'Ticker unit invalid';			
+		}
+	}
+
+   	return 'Ticker unit not found';
+});

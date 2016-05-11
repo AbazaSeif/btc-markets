@@ -96,6 +96,34 @@ class btcApp {
 	}
 
 	/**
+	* Get a price summary for a currency over a given currency over a defined time frame
+	*
+	* @param string $targetUnit
+	* @param integer $timeFrame 
+	*
+	* @return array 
+	*/
+	public function priceSummary( $targetUnit='BTC', $timeFrame=FALSE )
+	{
+		$marketData = new marketData();
+
+		if ($timeFrame) {
+			$priceSummary = $marketData->priceSummary( $targetUnit, $timeFrame );
+		} else {
+			$priceSummary = $marketData->priceSummary( $targetUnit );			
+		}
+
+		if ($priceSummary) {
+			return array(
+							'error' => null, 
+							'data' =>  $priceSummary
+						);			
+		} else {
+			return array('error' => 'Not enough data to provide average price.', 'data' =>  null);
+		}
+	}	
+	
+	/**
 	* Update all of the active cryptocurrencies from the exchange
 	*
 	* @return array

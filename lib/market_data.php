@@ -110,4 +110,30 @@ class marketData {
 		}
 	}	
 
+	/**
+	* Produce a price summary for a given time frame i.e BTC price over the last 24hr etc
+	* 
+	* @param string cryptoUnit
+	* @param integer timeFrame 
+	*/
+	public function priceSummary( $cryptoUnit='BTC', $timeFrame=NULL)
+	{
+		if (!$timeFrame) {
+			$timeFrame = time() - ( 3600 * 24 );
+		} else {
+			$timeFrame = time() - $timeFrame;
+		}
+
+		$priceSummary = R::getRow(
+									"SELECT MIN(last_price) AS min_price, ROUND(AVG(last_price),2) AS avg_price, MAX(last_price) AS max_price FROM (SELECT last_price FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :timeFrame LIMIT 10) tmp", 
+									array(
+										':cryptoUnit' => $cryptoUnit,
+										':timeFrame' => $timeFrame
+									)
+								  );
+		if ( $priceSummary ) {
+			return $priceSummary;
+		}
+	}
+
 }
