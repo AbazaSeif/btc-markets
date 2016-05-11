@@ -147,3 +147,21 @@ $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request)
 
    	return 'Ticker unit not found';
 });
+
+$klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($request) 
+{
+	$btcApp = new \btcMarkets\btcApp();
+
+	if (isset($request->targetUnit) && (is_numeric($request->timeFrame))) {
+		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+
+			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit), $request->timeFrame );
+
+ 			return json_encode($apiResp);
+		} else {
+			return 'Ticker unit invalid';			
+		}
+	}
+
+   	return 'Ticker unit not found';
+});

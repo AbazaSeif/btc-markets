@@ -40,7 +40,8 @@ Run "composer install" to fetch the required dependencies
 * /price-summary/ - Get the min, max and average BTC price over the last 24hrs
 * /price-summary/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-summary/LTC - Same as above but for Litecoin
-* /price-summary/ETH - Same as aabove but for Ethereum
+* /price-summary/ETH - Same as above but for Ethereum
+* /price-summary/currency/timeframe - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/3600 would get a price sumary of Litecoin over the last hour.
 
 **Misc**
 * /update-all - Update the ticker prices for all of the active cryptocurrencies
