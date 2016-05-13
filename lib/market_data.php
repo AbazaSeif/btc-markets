@@ -66,6 +66,8 @@ class marketData {
 	* Save the latest trades into the database
 	* 
 	* @param object $tradeData
+	*
+	* @return object
 	*/
 	public function updateTrades($tradeData)
 	{
@@ -100,6 +102,8 @@ class marketData {
 	* Get the average ticker price
 	* 
 	* @param string $targetUnit
+	*
+	* @return integer
 	*/
 	public function averageTickerPrice( $targetUnit='BTC' )
 	{		
@@ -115,6 +119,8 @@ class marketData {
 	* 
 	* @param string cryptoUnit
 	* @param integer timeFrame 
+	*
+	* @return array priceSummary
 	*/
 	public function priceSummary( $cryptoUnit='BTC', $timeFrame=NULL)
 	{
