@@ -43,7 +43,7 @@ class marketData {
 	*
 	* @param object $tickerData
 	* 
-	* @return array $storedRow
+	* @return array 
 	*/
 	public function saveTicker( $tickerData )
 	{
@@ -67,7 +67,7 @@ class marketData {
 	* 
 	* @param object $tradeData
 	*
-	* @return object
+	* @return object $savedRows
 	*/
 	public function updateTrades($tradeData)
 	{

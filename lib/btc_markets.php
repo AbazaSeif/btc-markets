@@ -4,7 +4,7 @@ namespace btcMarkets;
 use \btcMarkets\marketData;
 use \Exception as Exception;
 
-class btcMarkets {
+class btcMarkets extends marketAPI {
 	
 	protected $_apiBase = 'https://api.btcmarkets.net';
 
@@ -12,6 +12,8 @@ class btcMarkets {
 	* Get the latest ticker information from the API
 	*
 	* @param string $cryptoCoin 
+	*
+	* @return array $apiResp 	
 	*/
 	public function getTick( $cryptoCoin='BTC' ) 
 	{
@@ -25,7 +27,9 @@ class btcMarkets {
 	/**
 	* Get the latest trade information from the API
 	*
-	* @param string $cryptoCoin 
+	* @param string $cryptoCoin
+	*
+	* @return array $apiResp 
 	*/
 	public function getTrades( $cryptoCoin='BTC' ) 
 	{
@@ -40,6 +44,8 @@ class btcMarkets {
 	* Get the order book from the API
 	*
 	* @param string $cryptoCoin 
+	*
+	* @return array $apiResp 	
 	*/
 	public function getOrderBook( $cryptoCoin = 'BTC' ) 
 	{
@@ -55,7 +61,7 @@ class btcMarkets {
 	*
 	* @param string $jsonStr
 	*
-	* @return object 
+	* @return object $jsonResp
 	*/
 	public function parseJson( $jsonStr )
 	{
@@ -74,7 +80,7 @@ class btcMarkets {
 	* @param string $requestUrl
 	* @param array $requestParams
 	*
-	* @return object
+	* @return object $apiResp
 	*/
 	protected function _apiRequest( $requestUrl ) 
 	{

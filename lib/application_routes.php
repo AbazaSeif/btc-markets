@@ -1,6 +1,6 @@
 <?php 
 /**
-* Application route deifinitions for Klien
+* Application route deifinitions for Klien Framework
 **/
 
 // Get the current ticker price from the API
