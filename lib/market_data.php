@@ -102,12 +102,19 @@ class marketData {
 	* Get the average ticker price
 	* 
 	* @param string $targetUnit
+	* @param integer $timeFrame
 	*
 	* @return integer
 	*/
-	public function averageTickerPrice( $targetUnit='BTC' )
+	public function averageTickerPrice( $targetUnit='BTC', $timeFrame=NULL )
 	{		
-		$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit'");
+		if (!$timeFrame) {
+			$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit'");
+		} else {
+			$timeFrame = time() - ( 3600 * 24 );
+			$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit' AND timestamp > '$timeFrame'");
+		}
+
 
 		if (($avgPrice) && (is_numeric($avgPrice))) {
 			return number_format($avgPrice, 4);			
