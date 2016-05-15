@@ -9,9 +9,9 @@ This application can be used to collect market data for trend analysis or maybe 
 
 Create a MySQL database for the application to use, and import the structure from the sql/dump.sql file.
 
-Change the database parameters to match your environment in config/config.ini
+Add the API key for your BTC Markets account and change the database parameters to match your environment in the config/config.ini
 
-Run "composer install" to fetch the required dependencies
+Install [Composer](https://getcomposer.org/) so you can get all of the needed dependencies if you don't have it on your system already. Then run "composer install" to fetch the required dependencies
 
 # Existing Routes:
 
