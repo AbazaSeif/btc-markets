@@ -66,10 +66,11 @@ class marketData {
 	* Save the latest trades into the database
 	* 
 	* @param object $tradeData
+	* @param string $cryptoUnit
 	*
 	* @return object $savedRows
 	*/
-	public function updateTrades($tradeData)
+	public function updateTrades( $tradeData, $cryptoUnit )
 	{
 		$savedRows = 0;
 		
@@ -83,6 +84,7 @@ class marketData {
 				if (!$existingRow) {
 					$tradeObj = R::dispense("markethistory");
 
+					$tradeObj->crypto_unit = $cryptoUnit;
 					$tradeObj->transid = $btcTrade->tid;
 					$tradeObj->amount = $btcTrade->amount;
 					$tradeObj->price = $btcTrade->price;					

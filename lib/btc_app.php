@@ -51,7 +51,7 @@ class btcApp {
 		$apiResp = $btcMarkets->getTrades( $targetUnit );
 
 		$marketData = new marketData();
-		$tickerRow = $marketData->updateTrades( $apiResp );
+		$tickerRow = $marketData->updateTrades( $apiResp, $targetUnit );
 
 		return $btcMarkets->parseJson( $apiResp );	
 	}
