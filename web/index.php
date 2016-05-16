@@ -1,4 +1,8 @@
 <?php
+// Set headers to enable cross domain origin requests
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+
 // Load in required dependencies
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../lib/market_api.php';
