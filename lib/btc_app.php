@@ -122,7 +122,35 @@ class btcApp {
 			return array('error' => 'Not enough data to provide average price.', 'data' =>  null);
 		}
 	}	
-	
+
+	/**
+	* Get a price data for a currency over a given currency over a defined time frame
+	*
+	* @param string $targetUnit
+	* @param integer $timeFrame 
+	*
+	* @return array 
+	*/
+	public function priceData( $targetUnit='BTC', $timeFrame=FALSE )
+	{
+		$marketData = new marketData();
+
+		if ($timeFrame) {
+			$priceData = $marketData->priceData( $targetUnit, $timeFrame );
+		} else {
+			$priceData = $marketData->priceData( $targetUnit );			
+		}
+
+		if ($priceData) {
+			return array(
+							'error' => null, 
+							'data' =>  $priceData
+						);			
+		} else {
+			return array('error' => 'No price data available for the selected currency over this period.', 'data' =>  null);
+		}
+	}	
+
 	/**
 	* Update all of the active cryptocurrencies from the exchange
 	*

@@ -151,4 +151,32 @@ class marketData {
 		}
 	}
 
+	/**
+	* Get all the price data for a currency within a given timeframe
+	*
+	* @param string $cyptoUnit
+	* @param integer $timeFrame 
+	*
+	* @return array priceSummary
+	*/
+	public function priceData( $cryptoUnit='BTC', $timeFrame=NULL )
+	{
+		if (!$timeFrame) {
+			$timeFrame = time() - ( 3600 * 24 );
+		} else {
+			$timeFrame = time() - $timeFrame;
+		}
+
+		$priceData = R::getAll(
+								"SELECT * FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :timeFrame", 
+								array(
+									':cryptoUnit' => $cryptoUnit,
+									':timeFrame' => $timeFrame
+								)
+							);
+		if ( $priceData ) {
+			return $priceData;
+		}
+	}
+
 }

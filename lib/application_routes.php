@@ -165,3 +165,47 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 
    	return 'Ticker unit not found';
 });
+
+// Start routes related to price data
+$klein->respond('GET', '/price-data', function () {	
+	$btcApp = new \btcMarkets\btcApp();
+
+	$apiResp = json_encode($btcApp->priceData());
+	
+    return $apiResp;
+});
+
+$klein->respond('GET', '/price-data/[:targetUnit]', function ($request) 
+{
+	$btcApp = new \btcMarkets\btcApp();
+
+	if (isset($request->targetUnit)) {
+		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit) );
+
+ 			return json_encode($apiResp);
+		} else {
+			return 'Ticker unit invalid';			
+		}
+	}
+
+   	return 'Ticker unit not found';
+});
+
+$klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($request) 
+{
+	$btcApp = new \btcMarkets\btcApp();
+
+	if (isset($request->targetUnit) && (is_numeric($request->timeFrame))) {
+		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+
+			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit), $request->timeFrame );
+
+ 			return json_encode($apiResp);
+		} else {
+			return 'Ticker unit invalid';			
+		}
+	}
+
+   	return 'Ticker unit not found';
+});

@@ -18,30 +18,37 @@ Install [Composer](https://getcomposer.org/) so you can get all of the needed de
 **Current Price**
 * /current-price/BTC - Returns the current Bitcoin ticker price.
 * /current-price/LTC - Same as the above route but for Litecoin
-* /current-price/ETH - Same as the above route but for Ethereum
+* /current-price/ETH - Same as the above route but for Ether
 
 **Average Price**
 * /average-price/BTC - Returns the average Bitcoin market price across the datapoints in the database
 * /average-price/LTC - Same as the above route but for Litecoin
-* /average-price/ETH - Same as the above route but for Ethereum
+* /average-price/ETH - Same as the above route but for Ether
 
 **Latest Trades**
 * /latest-trades - Returns information about the latest Bitcoin trades on the exchange
 * /latest-trades/LTC - Same as the above route but for Litecoin
-* /latest-trades/ETH - Same as the above route but for Ethereum
+* /latest-trades/ETH - Same as the above route but for Ether
 
 **Order Book**
 * /order-book - Get the exchange order book for Bitcoin trades
 * /order-book/BTC - Get the exchange order book for Bitcoin trades
 * /order-book/LTC - Same as the above route but for Litecoin
-* /order-book/ETH - Same as the above route but for Ethereum
+* /order-book/ETH - Same as the above route but for Ether
 
 **Price Summary**
 * /price-summary/ - Get the min, max and average BTC price over the last 24hrs
 * /price-summary/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-summary/LTC - Same as above but for Litecoin
-* /price-summary/ETH - Same as above but for Ethereum
+* /price-summary/ETH - Same as above but for Ether
 * /price-summary/currency/timeframe - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/3600 would get a price sumary of Litecoin over the last hour.
+
+**Price Data**
+* /price-data/ - Get the stored price data for BTC over the last 24hrs
+* /price-data/BTC - Same as above but explicitly stating you want the BTC summary
+* /price-data/LTC - Same as above but for Litecoin
+* /price-data/ETH - Same as above but for Ether
+* /price-data/currency/timeframe - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/3600 would get return all of the available price points in the database for Litecoin over the last hour.
 
 **Misc**
 * /update-all - Update the ticker prices for all of the active cryptocurrencies

@@ -3,6 +3,7 @@
 namespace btcmarkets;
 
 class marketAPI {
+	
 	/**
 	* Request data from the BTCmarkets.net API
 	*
@@ -25,4 +26,22 @@ class marketAPI {
 
 		return $apiResp;
 	}
+
+	/**
+	* Convert a JSON response into an object
+	*
+	* @param string $jsonStr
+	*
+	* @return object $jsonResp
+	*/
+	public function parseJson( $jsonStr )
+	{
+		$jsonObj = json_decode( $jsonStr );
+
+		if (json_last_error()) {
+			throw new Exception('Invalid JSON response');
+		}
+
+		return $jsonObj;
+	}	
 }
