@@ -55,23 +55,6 @@ class btcMarkets extends marketAPI {
 
 		return $apiResp;
 	} 	
-	
-	/**
-	* Convert a JSON response into an object
-	*
-	* @param string $jsonStr
-	*
-	* @return object $jsonResp
-	*/
-	public function parseJson( $jsonStr )
-	{
-		$jsonObj = json_decode( $jsonStr );
 
-		if (json_last_error()) {
-			throw new Exception('Invalid JSON response');
-		}
-
-		return $jsonObj;
-	}
 
 }
