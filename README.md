@@ -41,14 +41,14 @@ Install [Composer](https://getcomposer.org/) so you can get all of the needed de
 * /price-summary/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-summary/LTC - Same as above but for Litecoin
 * /price-summary/ETH - Same as above but for Ether
-* /price-summary/currency/timeframe - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/3600 would get a price sumary of Litecoin over the last hour.
+* /price-summary/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/timeseconds/3600 would get a price sumary of Litecoin over the last hour.
 
 **Price Data**
 * /price-data/ - Get the stored price data for BTC over the last 24hrs
 * /price-data/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-data/LTC - Same as above but for Litecoin
 * /price-data/ETH - Same as above but for Ether
-* /price-data/currency/timeframe - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/3600 would get return all of the available price points in the database for Litecoin over the last hour.
+* /price-data/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/timeseconds/3600 would get return all of the available price points in the database for Litecoin over the last hour.
 
 **Misc**
 * /update-all - Update the ticker prices for all of the active cryptocurrencies
