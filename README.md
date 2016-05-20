@@ -1,9 +1,9 @@
 # BTC Market Data
 
-Simple PHP aggregator for Bitcoin market data from the Australian [btcmarkets.net](https://btcmarkets.net/) Bitcoin exchange.
+Simple PHP aggregator for cyptocurrency market data from the Australian [btcmarkets.net](https://btcmarkets.net/) Bitcoin exchange.
 
 # Why would I want this?
-This application can be used to collect market data for trend analysis or maybe you just want an easy way to find out current price of Bitcoin in AUD.
+This application can be used to collect market data for trend analysis or maybe you just want an easy way to find out current price of Bitcoin and other traded currencys on BTCmarkets.net in AUD.
 
 # Application Setup:
 
@@ -41,14 +41,14 @@ Install [Composer](https://getcomposer.org/) so you can get all of the needed de
 * /price-summary/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-summary/LTC - Same as above but for Litecoin
 * /price-summary/ETH - Same as above but for Ether
-* /price-summary/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/timeseconds/3600 would get a price sumary of Litecoin over the last hour.
+* /price-summary/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-summary/LTC/timeframe/3600 would get a price sumary of Litecoin over the last hour.
 
 **Price Data**
 * /price-data/ - Get the stored price data for BTC over the last 24hrs
 * /price-data/BTC - Same as above but explicitly stating you want the BTC summary
 * /price-data/LTC - Same as above but for Litecoin
 * /price-data/ETH - Same as above but for Ether
-* /price-data/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/timeseconds/3600 would get return all of the available price points in the database for Litecoin over the last hour.
+* /price-data/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/timeframe/3600 would get return all of the available price points in the database for Litecoin over the last hour.
 
 **Misc**
 * /update-all - Update the ticker prices for all of the active cryptocurrencies
