@@ -77,10 +77,11 @@ class btcApp {
 	* Get the average price 
 	*
 	* @param string $targetUnit
+	* @param integer $timeFrame 
 	*
 	* @return array 
 	*/
-	public function averagePrice( $targetUnit='BTC' )
+	public function averagePrice( $targetUnit='BTC', $timeFrame=FALSE )
 	{
 		$marketData = new marketData();
 		$avgPrice = $marketData->averageTickerPrice( $targetUnit );
