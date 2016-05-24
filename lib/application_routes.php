@@ -7,7 +7,7 @@
 $klein->respond('GET', '/current-price', function () 
 {
 	$btcApp = new \btcMarkets\btcApp();
-	$apiResp = $btcApp->updatePrice();		
+	$apiResp = $btcApp->updatePrice('BTC');		
 
     return json_encode($apiResp);
 });
@@ -20,13 +20,13 @@ $klein->respond('GET', '/update-all', function ()
     return json_encode($apiResp);
 });
 
-$klein->respond('GET', '/current-price/[:targetUnit]', function ($request) 
+$klein->respond('GET', '/current-price/[:targetUnit]', function ($request ) 
 {
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' || strtoupper($request->targetUnit) === 'ETH' ) {
-				
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
+
 			$apiResp = $btcApp->getPrice( strtoupper($request->targetUnit) );
 
  			return json_encode($apiResp);
@@ -52,7 +52,7 @@ $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request)
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' || strtoupper($request->targetUnit) === 'ETH' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 
 			$apiResp = $btcApp->latestTrades( 
 												strtoupper($request->targetUnit) 
@@ -82,8 +82,7 @@ $klein->respond('GET', '/order-book/[:targetUnit]', function ($request)
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
-
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->orderBook( 
 											strtoupper($request->targetUnit) 
 										 );
@@ -110,7 +109,7 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->averagePrice( strtoupper($request->targetUnit) );
 
  			return json_encode($apiResp);
@@ -136,7 +135,7 @@ $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request)
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit) );
 
  			return json_encode($apiResp);
@@ -153,7 +152,7 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit) && (is_numeric($request->timeFrame))) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit), $request->timeFrame );
 
@@ -170,7 +169,7 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 $klein->respond('GET', '/price-data', function () {	
 	$btcApp = new \btcMarkets\btcApp();
 
-	$apiResp = json_encode($btcApp->priceData());
+	$apiResp = json_encode($btcApp->priceData('BTC'));
 	
     return $apiResp;
 });
@@ -180,7 +179,7 @@ $klein->respond('GET', '/price-data/[:targetUnit]', function ($request)
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit)) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit) );
 
  			return json_encode($apiResp);
@@ -197,7 +196,7 @@ $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($requ
 	$btcApp = new \btcMarkets\btcApp();
 
 	if (isset($request->targetUnit) && (is_numeric($request->timeFrame))) {
-		if ( strtoupper($request->targetUnit) === 'BTC' || strtoupper($request->targetUnit) === 'LTC' ) {
+		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit), $request->timeFrame );
 

@@ -8,6 +8,17 @@ class btcApp {
 	protected $_activeCoins = array('BTC', 'LTC', 'ETH');
 
 	/**
+	*
+	* Return an array of the active coins
+	*
+	* @return array $this->_activeCoins
+	*/
+	public function getActive()
+	{
+		return $this->_activeCoins;
+	}
+
+	/**
 	* Update the target ticker price for one currency
 	*
 	* @param string $targetUnit

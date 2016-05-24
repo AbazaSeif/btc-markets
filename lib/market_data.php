@@ -156,13 +156,8 @@ class marketData {
 	*
 	* @return array priceSummary
 	*/
-	public function priceData( $cryptoUnit='BTC', $imeFrame )
+	public function priceData( $cryptoUnit='BTC', $timeFrame )
 	{
-		if (!$timeFrame) {
-			$timeFrame = time() - ( 3600 * 24 );
-		} else {
-			$timeFrame = time() - $timeFrame;
-		}
 
 		$priceData = R::getAll(
 								"SELECT * FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :startTime AND timestamp < :endTime ", 
