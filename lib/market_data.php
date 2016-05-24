@@ -104,19 +104,20 @@ class marketData {
 	* Get the average ticker price
 	* 
 	* @param string $targetUnit
-	* @param integer $timeFrame
+	* @param array $timeFrame
 	*
 	* @return integer
 	*/
 	public function averageTickerPrice( $targetUnit='BTC', $timeFrame=NULL )
 	{		
-		if (!$timeFrame) {
-			$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit'");
-		} else {
-			$timeFrame = time() - ( 3600 * 24 );
-			$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = '$targetUnit' AND timestamp > '$timeFrame'");
-		}
 
+		$avgPrice = R::getCell("SELECT AVG(last_price) FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :startTime AND timestamp < :endTime".
+									array(
+										':cryptoUnit' => $targetUnit,
+										':startTime' => $timeFrame['start'],
+										':endTime' => $timeFrame['end']										
+									)
+					);
 
 		if (($avgPrice) && (is_numeric($avgPrice))) {
 			return number_format($avgPrice, 4);			
@@ -127,23 +128,19 @@ class marketData {
 	* Produce a price summary for a given time frame i.e BTC price over the last 24hr etc
 	* 
 	* @param string cryptoUnit
-	* @param integer timeFrame 
+	* @param array timeFrame 
 	*
 	* @return array priceSummary
 	*/
-	public function priceSummary( $cryptoUnit='BTC', $timeFrame=NULL)
+	public function priceSummary( $cryptoUnit='BTC', $timeFrame )
 	{
-		if (!$timeFrame) {
-			$timeFrame = time() - ( 3600 * 24 );
-		} else {
-			$timeFrame = time() - $timeFrame;
-		}
 
 		$priceSummary = R::getRow(
-									"SELECT MIN(last_price) AS min_price, ROUND(AVG(last_price),2) AS avg_price, MAX(last_price) AS max_price FROM (SELECT last_price FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :timeFrame LIMIT 10) tmp", 
+									"SELECT MIN(last_price) AS min_price, ROUND(AVG(last_price),2) AS avg_price, MAX(last_price) AS max_price FROM (SELECT last_price FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :startTime AND timestamp < :endTime  LIMIT 10) tmp", 
 									array(
 										':cryptoUnit' => $cryptoUnit,
-										':timeFrame' => $timeFrame
+										':startTime' => $timeFrame['start'],
+										':endTime' => $timeFrame['end']											
 									)
 								  );
 		if ( $priceSummary ) {
@@ -155,11 +152,11 @@ class marketData {
 	* Get all the price data for a currency within a given timeframe
 	*
 	* @param string $cyptoUnit
-	* @param integer $timeFrame 
+	* @param array $timeFrame 
 	*
 	* @return array priceSummary
 	*/
-	public function priceData( $cryptoUnit='BTC', $timeFrame=NULL )
+	public function priceData( $cryptoUnit='BTC', $imeFrame )
 	{
 		if (!$timeFrame) {
 			$timeFrame = time() - ( 3600 * 24 );
@@ -168,15 +165,17 @@ class marketData {
 		}
 
 		$priceData = R::getAll(
-								"SELECT * FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :timeFrame", 
+								"SELECT * FROM marketdata WHERE instrument = :cryptoUnit AND timestamp > :startTime AND timestamp < :endTime ", 
 								array(
 									':cryptoUnit' => $cryptoUnit,
-									':timeFrame' => $timeFrame
+									':startTime' => $timeFrame['start'],
+									':endTime' => $timeFrame['end']		
 								)
 							);
 		if ( $priceData ) {
 			return $priceData;
 		}
 	}
+
 
 }

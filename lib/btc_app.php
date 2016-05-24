@@ -12,7 +12,7 @@ class btcApp {
 	*
 	* @param string $targetUnit
 	*/
-	public function updatePrice($targetUnit = 'BTC')
+	public function updatePrice( $targetUnit = 'BTC' )
 	{
 		$btcMarkets = new btcMarkets();
 
@@ -31,7 +31,7 @@ class btcApp {
 	*
 	* @param string $targetUnit
 	*/
-	public function getPrice($targetUnit = 'BTC')
+	public function getPrice( $targetUnit = 'BTC' )
 	{
 		$marketData = new marketData();
 		$tickerRow = $marketData->getPrice( $targetUnit );
@@ -78,13 +78,15 @@ class btcApp {
 	* Get the average price 
 	*
 	* @param string $targetUnit
+	* @param integer $timeFrame 
 	*
 	* @return array 
 	*/
-	public function averagePrice( $targetUnit='BTC' )
+	public function averagePrice( $targetUnit='BTC', $timeFrame=NULL )
 	{
 		$marketData = new marketData();
-		$avgPrice = $marketData->averageTickerPrice( $targetUnit );
+		$timePeriod = $this->_convertTimeFrame( $timeFrame );
+		$avgPrice = $marketData->averageTickerPrice( $timePeriod );
 
 		if ($avgPrice) {
 			return array(
@@ -104,15 +106,12 @@ class btcApp {
 	*
 	* @return array 
 	*/
-	public function priceSummary( $targetUnit='BTC', $timeFrame=FALSE )
+	public function priceSummary( $targetUnit='BTC', $timeFrame=NULL )
 	{
 		$marketData = new marketData();
 
-		if ($timeFrame) {
-			$priceSummary = $marketData->priceSummary( $targetUnit, $timeFrame );
-		} else {
-			$priceSummary = $marketData->priceSummary( $targetUnit );			
-		}
+		$timePeriod = $this->_convertTimeFrame( $timeFrame );
+		$priceSummary = $marketData->priceSummary( $targetUnit, $timePeriod );
 
 		if ($priceSummary) {
 			return array(
@@ -132,15 +131,12 @@ class btcApp {
 	*
 	* @return array 
 	*/
-	public function priceData( $targetUnit='BTC', $timeFrame=FALSE )
+	public function priceData( $targetUnit='BTC', $timeFrame=NULL )
 	{
 		$marketData = new marketData();
 
-		if ($timeFrame) {
-			$priceData = $marketData->priceData( $targetUnit, $timeFrame );
-		} else {
-			$priceData = $marketData->priceData( $targetUnit );			
-		}
+		$timePeriod = $this->_convertTimeFrame( $timeFrame );
+		$priceData = $marketData->priceData( $targetUnit, $timePeriod );
 
 		if ($priceData) {
 			return array(
@@ -169,7 +165,31 @@ class btcApp {
 			$tickerRow = $marketData->saveTicker( $marketObj );
 		}
 
-
 		return array('data' => 'All currencies updated', 'error' => false);		
 	}
+
+	/**
+	* Return a time period in seconds 
+	*
+	* @param integer $timeSeconds
+	*
+	* @return array $startFinish
+	*/
+	protected function _convertTimeFrame( $timeSeconds = NULL ) 
+	{
+		$timeNow = time();
+
+		if (!$timeSeconds) {
+			$timeSeconds = $timeNow - ( 3600 * 24 );
+		} else {
+			$timeSeconds = $timeNow - $timeSeconds;
+		}
+
+		$startFinish = array(
+								'start' => $timeSeconds,
+								'end' => $timeNow
+							);
+
+		return $startFinish;
+	}	
 }
