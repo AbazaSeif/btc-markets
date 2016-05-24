@@ -36,7 +36,11 @@ class btcApp {
 		$marketData = new marketData();
 		$tickerRow = $marketData->getPrice( $targetUnit );
 
-		return $tickerRow;
+		if ($tickerRow) {
+			return $tickerRow;
+		} else {
+			return array('error' => 'Unable to retrieve any price data for this currency.', 'data' =>  null);
+		}
 	}
 
 	/**
@@ -66,9 +70,6 @@ class btcApp {
 		$btcMarkets = new btcMarkets();
 
 		$apiResp = $btcMarkets->getOrderBook( $targetUnit );
-
-		//$marketData = new marketData();
-		//$tickerRow = $marketData->updateTrades( $apiResp );
 
 		return $btcMarkets->parseJson( $apiResp );	
 	}
