@@ -7,46 +7,18 @@ use \Exception as Exception;
 class btcMarkets extends marketAPI {
 	
 	protected $_apiBase = 'https://api.btcmarkets.net';
-	protected $_selectedCurrency = 'AUD';
-
-	/**
-	* Return the currently selected currency
-	*
-	* @return string
-	*/
-	public function getCurrency()
-	{
-		return $this->_selectedCurrency;
-	}
-
-	/**
-	* Set the selected currency currency
-	*
-	* @param string
-	*
-	* @return boolean
-	*/
-	public function setCurrency($selectedCurrency)
-	{
-		if ( ($selectedCurrency == 'AUD') || ($selectedCurrency == 'AUD') ) {
-			$this->_selectedCurrency = $selectedCurrency;
-
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	/**
 	* Get the latest ticker information from the API
 	*
 	* @param string $cryptoCoin 
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 	
 	*/
-	public function getTick( $cryptoCoin='BTC' ) 
+	public function getTick( $cryptoCoin='BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/' . $this->_selectedCurrency . '/tick';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/tick';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 
@@ -57,12 +29,13 @@ class btcMarkets extends marketAPI {
 	* Get the latest trade information from the API
 	*
 	* @param string $cryptoCoin
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 
 	*/
-	public function getTrades( $cryptoCoin='BTC' ) 
+	public function getTrades( $cryptoCoin='BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/' . $this->_selectedCurrency . '/trades';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/trades';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 
@@ -73,12 +46,13 @@ class btcMarkets extends marketAPI {
 	* Get the order book from the API
 	*
 	* @param string $cryptoCoin 
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 	
 	*/
-	public function getOrderBook( $cryptoCoin = 'BTC' ) 
+	public function getOrderBook( $cryptoCoin = 'BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/' . $this->_selectedCurrency . '/orderbook';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/orderbook';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 

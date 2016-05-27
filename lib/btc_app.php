@@ -6,6 +6,35 @@ use \btcMarkets\btcMarkets;
 
 class btcApp {
 	protected $_activeCoins = array('BTC', 'LTC', 'ETH');
+	protected $_selectedCurrency = 'AUD';
+
+	/**
+	* Return the currently selected currency
+	*
+	* @return string
+	*/
+	public function getCurrency()
+	{
+		return $this->_selectedCurrency;
+	}
+
+	/**
+	* Set the selected currency currency
+	*
+	* @param string
+	*
+	* @return boolean
+	*/
+	public function setCurrency($selectedCurrency)
+	{
+		if ( ($selectedCurrency == 'AUD') || ($selectedCurrency == 'USD') ) {
+			$this->_selectedCurrency = $selectedCurrency;
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	*
@@ -22,17 +51,18 @@ class btcApp {
 	* Update the target ticker price for one currency
 	*
 	* @param string $targetUnit
+	* @param string $priceUnit	
 	*/
 	public function updatePrice( $targetUnit = 'BTC' )
 	{
 		$btcMarkets = new btcMarkets();
 
-		$apiResp = $btcMarkets->getTick( $targetUnit );
+		$apiResp = $btcMarkets->getTick( $targetUnit, $this->_selectedCurrency );
 
 		$marketObj = $btcMarkets->parseJson( $apiResp );
 
 		$marketData = new marketData();
-		$tickerRow = $marketData->saveTicker( $marketObj );
+		$tickerRow = $marketData->saveTicker( $marketObj, $this->_selectedCurrency );
 
 		return $tickerRow;
 	}
@@ -45,7 +75,7 @@ class btcApp {
 	public function getPrice( $targetUnit = 'BTC' )
 	{
 		$marketData = new marketData();
-		$tickerRow = $marketData->getPrice( $targetUnit );
+		$tickerRow = $marketData->getPrice( $targetUnit, $this->_selectedCurrency );
 
 		if ($tickerRow) {
 			return $tickerRow;
@@ -63,10 +93,10 @@ class btcApp {
 	{
 		$btcMarkets = new btcMarkets();
 
-		$apiResp = $btcMarkets->getTrades( $targetUnit );
+		$apiResp = $btcMarkets->getTrades( $targetUnit, $this->_selectedCurrency );
 
 		$marketData = new marketData();
-		$tickerRow = $marketData->updateTrades( $apiResp, $targetUnit );
+		$tickerRow = $marketData->updateTrades( $apiResp, $targetUnit, $this->_selectedCurrency );
 
 		return $btcMarkets->parseJson( $apiResp );	
 	}
@@ -80,7 +110,7 @@ class btcApp {
 	{
 		$btcMarkets = new btcMarkets();
 
-		$apiResp = $btcMarkets->getOrderBook( $targetUnit );
+		$apiResp = $btcMarkets->getOrderBook( $targetUnit, $this->_selectedCurrency );
 
 		return $btcMarkets->parseJson( $apiResp );	
 	}
@@ -97,12 +127,12 @@ class btcApp {
 	{
 		$marketData = new marketData();
 		$timePeriod = $this->_convertTimeFrame( $timeFrame );
-		$avgPrice = $marketData->averageTickerPrice( $timePeriod );
+		$avgPrice = $marketData->averageTickerPrice( $targetUnit, $timePeriod, $this->_selectedCurrency );
 
 		if ($avgPrice) {
 			return array(
 							'error' => null, 
-							'data' =>  array('price' => $avgPrice)
+							'data' =>  array( 'price' => $avgPrice, 'price_unit' => $this->_selectedCurrency )
 						);			
 		} else {
 			return array('error' => 'Not enough data to provide average price.', 'data' =>  null);
@@ -122,9 +152,11 @@ class btcApp {
 		$marketData = new marketData();
 
 		$timePeriod = $this->_convertTimeFrame( $timeFrame );
-		$priceSummary = $marketData->priceSummary( $targetUnit, $timePeriod );
+		$priceSummary = $marketData->priceSummary( $targetUnit, $timePeriod, $this->_selectedCurrency );
 
 		if ($priceSummary) {
+			$priceSummary['price_unit'] = $this->_selectedCurrency;
+
 			return array(
 							'error' => null, 
 							'data' =>  $priceSummary
@@ -147,7 +179,7 @@ class btcApp {
 		$marketData = new marketData();
 
 		$timePeriod = $this->_convertTimeFrame( $timeFrame );
-		$priceData = $marketData->priceData( $targetUnit, $timePeriod );
+		$priceData = $marketData->priceData( $targetUnit, $timePeriod, $this->_selectedCurrency );
 
 		if ($priceData) {
 			return array(
@@ -170,10 +202,10 @@ class btcApp {
 		$marketData = new marketData();
 
 		foreach ($this->_activeCoins as $activeCoin) {
-			$apiResp = $btcMarkets->getTick( $activeCoin );
+			$apiResp = $btcMarkets->getTick( $activeCoin, $this->_selectedCurrency );
 
 			$marketObj = $btcMarkets->parseJson( $apiResp );
-			$tickerRow = $marketData->saveTicker( $marketObj );
+			$tickerRow = $marketData->saveTicker( $marketObj, $this->_selectedCurrency );
 		}
 
 		return array('data' => 'All currencies updated', 'error' => false);		
