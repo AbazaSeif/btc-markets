@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2016 at 11:34 AM
+-- Generation Time: May 27, 2016 at 03:37 PM
 -- Server version: 5.6.30-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.17
 
@@ -36,8 +36,21 @@ CREATE TABLE IF NOT EXISTS `marketdata` (
   `timestamp` int(11) unsigned DEFAULT NULL,
   `volume` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `markethistory`
+--
+
+CREATE TABLE IF NOT EXISTS `markethistory` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `crypto_unit` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transid` int(11) unsigned DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `timestamp` int(11) unsigned DEFAULT NULL,
+  `price_unit` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;
