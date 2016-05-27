@@ -93,7 +93,8 @@ class marketData {
 					$tradeObj->transid = $btcTrade->tid;
 					$tradeObj->amount = $btcTrade->amount;
 					$tradeObj->price = $btcTrade->price;					
-					$tradeObj->timestamp = $btcTrade->date;	
+					$tradeObj->timestamp = $btcTrade->date;
+					$tradeObj->price_unit = $priceUnit;	
 
 					R::store( $tradeObj );			
 
