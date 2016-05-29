@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2016 at 09:17 AM
+-- Generation Time: May 27, 2016 at 03:37 PM
 -- Server version: 5.6.30-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.16
+-- PHP Version: 5.5.9-1ubuntu4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `btc_test`
+-- Database: `btc_markets`
 --
 
 -- --------------------------------------------------------
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `marketdata` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `price_unit` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `best_bid` double DEFAULT NULL,
   `best_ask` double DEFAULT NULL,
   `last_price` double DEFAULT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `marketdata` (
   `timestamp` int(11) unsigned DEFAULT NULL,
   `volume` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=46562 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -50,9 +51,6 @@ CREATE TABLE IF NOT EXISTS `markethistory` (
   `amount` double DEFAULT NULL,
   `price` double DEFAULT NULL,
   `timestamp` int(11) unsigned DEFAULT NULL,
+  `price_unit` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3414 ;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;

@@ -12,12 +12,13 @@ class btcMarkets extends marketAPI {
 	* Get the latest ticker information from the API
 	*
 	* @param string $cryptoCoin 
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 	
 	*/
-	public function getTick( $cryptoCoin='BTC' ) 
+	public function getTick( $cryptoCoin='BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/AUD/tick';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/tick';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 
@@ -28,12 +29,13 @@ class btcMarkets extends marketAPI {
 	* Get the latest trade information from the API
 	*
 	* @param string $cryptoCoin
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 
 	*/
-	public function getTrades( $cryptoCoin='BTC' ) 
+	public function getTrades( $cryptoCoin='BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/AUD/trades';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/trades';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 
@@ -44,17 +46,16 @@ class btcMarkets extends marketAPI {
 	* Get the order book from the API
 	*
 	* @param string $cryptoCoin 
+	* @param string $priceUnit 	
 	*
 	* @return array $apiResp 	
 	*/
-	public function getOrderBook( $cryptoCoin = 'BTC' ) 
+	public function getOrderBook( $cryptoCoin = 'BTC', $priceUnit='AUD' ) 
 	{
-		$requestUrl = '/market/' . $cryptoCoin . '/AUD/orderbook';
+		$requestUrl = '/market/' . $cryptoCoin . '/' . $priceUnit . '/orderbook';
 
 		$apiResp = $this->_apiRequest( $requestUrl );
 
 		return $apiResp;
 	} 	
-
-
 }
