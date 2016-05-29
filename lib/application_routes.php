@@ -20,6 +20,29 @@ $klein->respond('GET', '/update-all', function ()
     return json_encode($apiResp);
 });
 
+$klein->respond('GET', '/active-exchanges', function () 
+{
+	$btcApp = new \btcMarkets\btcApp();
+	$apiResp = $btcApp->getActiveExchanges();		
+
+	if ($apiResp) {
+		return json_encode( 
+							array(
+									'error' => null, 
+									'data' => $apiResp
+								)
+						);
+	} else {
+		return json_encode( 
+							array(
+									'error' => 'Unable to retrieve active exchanges', 
+									'data' => null
+								)
+						);
+	}
+    return json_encode($apiResp);
+});
+
 $klein->respond('GET', '/current-price/[:targetUnit]', function ($request ) 
 {
 	$btcApp = new \btcMarkets\btcApp();

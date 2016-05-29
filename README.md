@@ -51,7 +51,8 @@ Install [Composer](https://getcomposer.org/) so you can get all of the needed de
 * /price-data/currency/timeframe/timeseconds - Same as above for each currency but limited to a particular time frame denoted in seconds i.e /price-data/LTC/timeframe/3600 would get return all of the available price points in the database for Litecoin over the last hour.
 
 **Misc**
-* /update-all - Update the ticker prices for all of the active cryptocurrencies in the database
+/update-all - Update the ticker prices for all of the active cryptocurrencies in the database
+/active-exchanges - Get the exchages that are currently active in the system
 
 # Required Libraries:
 

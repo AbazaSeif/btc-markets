@@ -48,6 +48,20 @@ class btcApp {
 	}
 
 	/**
+	*
+	* Return an array of the active echanges in the database
+	*
+	* @return object
+	*/
+	public function getActiveExchanges()
+	{
+		$marketData = new marketData();
+		$activeExchanges = $marketData->getActiveExchanges();
+
+		return $activeExchanges;		
+	}
+
+	/**
 	* Update the target ticker price for one currency
 	*
 	* @param string $targetUnit

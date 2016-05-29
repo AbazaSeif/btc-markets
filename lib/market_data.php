@@ -18,6 +18,24 @@ class marketData {
 	/**
 	* Get the latest price for a currency
 	*
+	* @return object $activeExchanges
+	*/
+	public function getActiveExchanges()
+	{
+		$activeExchanges = R::getAll(
+					   "SELECT * FROM exchanges WHERE active = :exchangeActive ORDER BY id DESC ", 
+				            array( 
+				                ':exchangeActive' => 1 
+				            )
+		               );
+
+		if ($activeExchanges) {
+			return $activeExchanges;
+		}
+	}
+	/**
+	* Get the latest price for a currency
+	*
 	* @param string $targetUnit
 	* @param string $priceUnit	
 	* @param integer $resultLimit	
