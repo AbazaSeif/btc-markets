@@ -6,8 +6,9 @@ header('Content-Type: application/json');
 // Load in required dependencies
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../lib/market_api.php';
-require_once __DIR__ . '/../lib/btc_app.php';
 require_once __DIR__ . '/../lib/btc_markets.php';
+require_once __DIR__ . '/../lib/bitfinex.php';
+require_once __DIR__ . '/../lib/btc_app.php';
 require_once __DIR__ . '/../lib/market_data.php';
 
 // Load the application config

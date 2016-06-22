@@ -3,6 +3,7 @@ namespace btcMarkets;
 
 use \btcMarkets\marketData;
 use \btcMarkets\btcMarkets;
+use \btcMarkets\bitFinex;
 
 class btcApp {
 	protected $_activeCoins = array('BTC', 'LTC', 'ETH');
@@ -212,14 +213,21 @@ class btcApp {
 	*/
 	public function updateAll()
 	{
-		$btcMarkets = new btcMarkets();
 		$marketData = new marketData();
 
-		foreach ($this->_activeCoins as $activeCoin) {
-			$apiResp = $btcMarkets->getTick( $activeCoin, $this->_selectedCurrency );
+		$activeExchanges = $marketData->getActiveExchanges();
 
-			$marketObj = $btcMarkets->parseJson( $apiResp );
-			$tickerRow = $marketData->saveTicker( $marketObj, $this->_selectedCurrency );
+		foreach ($this->_activeCoins as $activeCoin) {
+			foreach ($activeExchanges as $activeExchange) {
+				if ($activeExchange['library']) {
+					$exchangeLibrary = new $activeExchange['library'];
+
+					$apiResp = $exchangeLibrary->getTick( $activeCoin, $this->_selectedCurrency );
+					$marketObj = $exchangeLibrary->parseJson( $apiResp );
+
+					$tickerRow = $marketData->saveTicker( $marketObj, $activeExchange['id'], $this->_selectedCurrency );
+				}
+			}
 		}
 
 		return array('data' => 'All currencies updated', 'error' => false);		

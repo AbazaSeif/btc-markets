@@ -62,13 +62,13 @@ class marketData {
 	* Save ticker data to the database
 	*
 	* @param object $tickerData
-	* @param object $priceUnit	
+	* @param integer $activeExchange
+	* @param string $priceUnit	
 	* 
 	* @return array 
 	*/
-	public function saveTicker( $tickerData, $priceUnit = 'AUD' )
+	public function saveTicker( $tickerData, $activeExchange, $priceUnit = 'AUD' )
 	{
-
 		$priceObj = R::dispense("marketdata");
 
 		$priceObj->best_bid = $tickerData->bestBid;
@@ -78,6 +78,7 @@ class marketData {
 		$priceObj->instrument = $tickerData->instrument;
 		$priceObj->timestamp = $tickerData->timestamp;
 		$priceObj->volume = $tickerData->volume24h;
+		$priceObj->exchange = $activeExchange;
 
 		R::store( $priceObj );
 

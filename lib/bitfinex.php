@@ -40,19 +40,4 @@ class bitFinex extends marketAPI {
 		return $apiResp;
 	}
 
-	/**
-	* Recent funcding data for a currency- More details can be found at http://docs.bitfinex.com/#lends
-	*
-	* @param string $cryptoCoin 
-	*
-	* @return array $apiResp 	
-	*/
-	public function getStats( $cryptoCoin='BTC' ) 
-	{
-		$requestUrl = '/lends/' . $cryptoCoin;
-
-		$apiResp = $this->_apiRequest( $requestUrl );
-
-		return $apiResp;
-	}
 }

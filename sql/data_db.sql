@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 29, 2016 at 03:28 PM
+-- Generation Time: Jun 22, 2016 at 05:15 PM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.16
+-- PHP Version: 5.5.9-1ubuntu4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `exchanges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
+  `library` varchar(100) DEFAULT NULL,
   `country` varchar(200) NOT NULL,
   `active` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
@@ -38,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `exchanges` (
 -- Dumping data for table `exchanges`
 --
 
-INSERT INTO `exchanges` (`id`, `name`, `country`, `active`) VALUES
-(1, 'btcmarkets', 'Australia', 1),
-(2, 'bitfinex', 'Hong Kong', 1);
+INSERT INTO `exchanges` (`id`, `name`, `library`, `country`, `active`) VALUES
+(1, 'btcmarkets', '\\btcMarkets\\btcMarkets', 'Australia', 1),
+(2, 'bitfinex', '\\btcMarkets\\bitFinex', 'Hong Kong', 0);
 
 -- --------------------------------------------------------
 
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `marketdata` (
   `instrument` varchar(191) DEFAULT NULL,
   `timestamp` int(11) unsigned DEFAULT NULL,
   `volume` int(11) DEFAULT NULL,
+  `exhange` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_marketdata_exchanges_idx` (`exchange`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
