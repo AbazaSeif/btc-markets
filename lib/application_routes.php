@@ -2,16 +2,6 @@
 /**
 * Application route deifinitions for Klien Framework
 **/
-
-// Get the current ticker price from the API
-$klein->respond('GET', '/current-price', function () 
-{
-	$btcApp = new \btcMarkets\btcApp();
-	$apiResp = $btcApp->updatePrice('BTC');		
-
-    return json_encode($apiResp);
-});
-
 $klein->respond('GET', '/update-all', function () 
 {
 	$btcApp = new \btcMarkets\btcApp();
@@ -47,29 +37,23 @@ $klein->respond('GET', '/current-price/[:targetUnit]', function ($request )
 {
 	$btcApp = new \btcMarkets\btcApp();
 
-	if (isset($request->targetUnit)) {
-		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
-
-			$apiResp = $btcApp->getPrice( strtoupper($request->targetUnit) );
-
- 			return json_encode($apiResp);
-		} else {
-			return 'Ticker unit invalid';			
-		}
+	if (!isset($request->targetUnit)) {
+		$targetUnit = 'BTC';
+	} else {
+		$targetUnit = $request->targetUnit;
 	}
+	echo $targetUnit;
+	if ( in_array(strtoupper($targetUnit), $btcApp->getActive() )) {
 
-   	return 'Ticker unit not found';
+		$apiResp = $btcApp->getPrice( strtoupper($targetUnit) );
+
+		return json_encode($apiResp);
+	} else {
+		return 'Ticker unit invalid';			
+	}
 });
 
 // Get the latest trades from the API
-$klein->respond('GET', '/latest-trades', function () 
-{
-	$btcApp = new \btcMarkets\btcApp();
-	$apiResp = $btcApp->latestTrades();		
-
-    return json_encode($apiResp);
-});
-
 $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
