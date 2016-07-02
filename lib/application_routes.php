@@ -75,15 +75,6 @@ $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request)
 });
 
 // Get the order book from the API
-$klein->respond('GET', '/order-book', function () 
-{
-	$btcApp = new \btcMarkets\btcApp();
-
-	$apiResp = $btcApp->orderBook();
-
-	return json_encode($apiResp);
-});
-
 $klein->respond('GET', '/order-book/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
@@ -104,13 +95,6 @@ $klein->respond('GET', '/order-book/[:targetUnit]', function ($request)
 });
 
 // Get the average ticker price from the API
-$klein->respond('GET', '/average-price', function () {	
-	$btcApp = new \btcMarkets\btcApp();
-
-	$apiResp = json_encode($btcApp->averagePrice());
-    return $apiResp;
-});
-
 $klein->respond('GET', '/average-price/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
@@ -129,14 +113,6 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 });
 
 // Start routes related to price summary
-$klein->respond('GET', '/price-summary', function () {	
-	$btcApp = new \btcMarkets\btcApp();
-
-	$apiResp = json_encode($btcApp->priceSummary());
-	
-    return $apiResp;
-});
-
 $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
