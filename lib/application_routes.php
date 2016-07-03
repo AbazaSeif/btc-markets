@@ -149,14 +149,6 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 });
 
 // Start routes related to price data
-$klein->respond('GET', '/price-data', function () {	
-	$btcApp = new \btcMarkets\btcApp();
-
-	$apiResp = json_encode($btcApp->priceData('BTC'));
-	
-    return $apiResp;
-});
-
 $klein->respond('GET', '/price-data/[:targetUnit]', function ($request) 
 {
 	$btcApp = new \btcMarkets\btcApp();
