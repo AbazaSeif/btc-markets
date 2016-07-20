@@ -65,6 +65,12 @@ Further information can be found at the wiki for the BTC markets API on github:
 
 * [BTC Markets API](https://github.com/BTCMarkets/API)
 
+# Roadmap
+
+* Add new Bitcoin exchanges other than BTC Markets
+* Add support for other currencies other than AUD
+* Cleanup the routing
+
 # Licence
 
 Copyright (C) 2016 [Anthony Mills](http://www.anthony-mills.com)
