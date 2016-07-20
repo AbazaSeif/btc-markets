@@ -47,10 +47,12 @@ $klein->respond('GET', '/current-price/[:targetUnit]', function ($request )
 
 		$apiResp = $btcApp->getPrice( strtoupper($targetUnit) );
 
-		return json_encode($apiResp);
+		
 	} else {
-		return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 	}
+
+	return json_encode($apiResp);
 });
 
 // Get the latest trades from the API
@@ -65,13 +67,15 @@ $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request)
 												strtoupper($request->targetUnit) 
 											);
 
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return 'Ticker unit not found';
+
+	return json_encode($apiResp);
 });
 
 // Get the order book from the API
@@ -85,13 +89,15 @@ $klein->respond('GET', '/order-book/[:targetUnit]', function ($request)
 											strtoupper($request->targetUnit) 
 										 );
 
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return 'Ticker unit not found';
+
+	return json_encode($apiResp);
 });
 
 // Get the average ticker price from the API
@@ -103,13 +109,14 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->averagePrice( strtoupper($request->targetUnit) );
 
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
+	return json_encode($apiResp);
 });
 
 // Start routes related to price summary
@@ -121,13 +128,14 @@ $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request)
 		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit) );
 
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
+	return json_encode($apiResp);
 });
 
 $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($request) 
@@ -138,14 +146,15 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit), $request->timeFrame );
-
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
+
+	return json_encode($apiResp);
 });
 
 // Start routes related to price data
@@ -157,13 +166,15 @@ $klein->respond('GET', '/price-data/[:targetUnit]', function ($request)
 		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit) );
 
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
+
+	return json_encode($apiResp);
 });
 
 $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($request) 
@@ -174,12 +185,13 @@ $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($requ
 		if ( in_array(strtoupper($request->targetUnit), $btcApp->getActive() )) {
 
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit), $request->timeFrame );
-
- 			return json_encode($apiResp);
 		} else {
-			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
+			$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');
 		}
+	} else {
+		$apiResp = array('data' => null, 'error' => 'Ticker unit invalid');		
 	}
 
-   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
+
+	return json_encode($apiResp);
 });
