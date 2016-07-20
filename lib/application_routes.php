@@ -49,7 +49,7 @@ $klein->respond('GET', '/current-price/[:targetUnit]', function ($request )
 
 		return json_encode($apiResp);
 	} else {
-		return 'Ticker unit invalid';			
+		return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 	}
 });
 
@@ -67,7 +67,7 @@ $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request)
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 		}
 	}
 
@@ -87,7 +87,7 @@ $klein->respond('GET', '/order-book/[:targetUnit]', function ($request)
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 		}
 	}
 
@@ -105,11 +105,11 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));			
 		}
 	}
 
-   	return 'Ticker unit not found';
+   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
 });
 
 // Start routes related to price summary
@@ -123,11 +123,11 @@ $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request)
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));			
 		}
 	}
 
-   	return 'Ticker unit not found';
+   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
 });
 
 $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($request) 
@@ -141,11 +141,11 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 		}
 	}
 
-   	return 'Ticker unit not found';
+   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
 });
 
 // Start routes related to price data
@@ -159,11 +159,11 @@ $klein->respond('GET', '/price-data/[:targetUnit]', function ($request)
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 		}
 	}
 
-   	return 'Ticker unit not found';
+   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
 });
 
 $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($request) 
@@ -177,9 +177,9 @@ $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($requ
 
  			return json_encode($apiResp);
 		} else {
-			return 'Ticker unit invalid';			
+			return json_encode(array('data' => null, 'error' => Ticker unit invalid'));;			
 		}
 	}
 
-   	return 'Ticker unit not found';
+   	return json_encode(array('data' => null, 'error' => Ticker unit invalid'));
 });
