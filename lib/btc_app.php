@@ -234,6 +234,23 @@ class btcApp {
 	}
 
 	/**
+	* Create an error object
+	*
+	* @param string $errorMsg
+	*
+	* @return array $apiResp
+	*/
+	public function routingError( $errorMsg ) {
+		
+		$apiResp = array(
+						'error' => $errorMsg, 
+						'data' => null
+				);
+		
+		return $apiResp;
+	}
+
+	/**
 	* Return a time period in seconds 
 	*
 	* @param integer $timeSeconds
