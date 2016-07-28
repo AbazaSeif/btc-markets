@@ -240,7 +240,7 @@ class btcApp {
 	*
 	* @return array $apiResp
 	*/
-	public function routingError( $errorMsg ) {
+	public function routingError( $errorMsg='Ticker unit invalid' ) {
 		
 		$apiResp = array(
 						'error' => $errorMsg, 

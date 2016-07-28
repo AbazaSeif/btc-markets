@@ -42,7 +42,7 @@ $klein->respond('GET', '/current-price/[:targetUnit]', function ( $request )
 
 		
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 	return json_encode($apiResp);
@@ -61,10 +61,10 @@ $klein->respond('GET', '/latest-trades/[:targetUnit]', function ($request)
 											);
 
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');		
+		$apiResp = $btcApp->routingError();		
 	}
 
 
@@ -83,10 +83,10 @@ $klein->respond('GET', '/order-book/[:targetUnit]', function ($request)
 										 );
 
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 
@@ -103,10 +103,10 @@ $klein->respond('GET', '/average-price/[:targetUnit]', function ($request)
 			$apiResp = $btcApp->averagePrice( strtoupper($request->targetUnit) );
 
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 	return json_encode($apiResp);
@@ -122,10 +122,10 @@ $klein->respond('GET', '/price-summary/[:targetUnit]', function ($request)
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit) );
 
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 	return json_encode($apiResp);
@@ -140,10 +140,10 @@ $klein->respond('GET', '/price-summary/[:targetUnit]/[:timeFrame]', function ($r
 
 			$apiResp = $btcApp->priceSummary( strtoupper($request->targetUnit), $request->timeFrame );
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');	
+		$apiResp = $btcApp->routingError();	
 	}
 
 
@@ -160,10 +160,10 @@ $klein->respond('GET', '/price-data/[:targetUnit]', function ($request)
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit) );
 
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 
@@ -179,10 +179,10 @@ $klein->respond('GET', '/price-data/[:targetUnit]/[:timeFrame]', function ($requ
 
 			$apiResp = $btcApp->priceData( strtoupper($request->targetUnit), $request->timeFrame );
 		} else {
-			$apiResp = $btcApp->routingError('Ticker unit invalid');
+			$apiResp = $btcApp->routingError();
 		}
 	} else {
-		$apiResp = $btcApp->routingError('Ticker unit invalid');
+		$apiResp = $btcApp->routingError();
 	}
 
 
