@@ -6,7 +6,7 @@ use \btcMarkets\btcMarkets;
 use \btcMarkets\bitFinex;
 
 class btcApp {
-	protected $_activeCoins = array('BTC', 'LTC', 'ETH');
+	protected $_activeCoins = array('BTC', 'LTC', 'ETH', 'ETC');
 	protected $_selectedCurrency = 'AUD';
 
 	/**
